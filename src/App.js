@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from "axios"
 import './App.css';
 
@@ -7,11 +7,24 @@ function App() {
   const [showChangeForm, setShowChangeForm] = useState(false)
   const [problemText, setProblemText] = useState()
 
+  useEffect(() =>{
+    ///Local storage to stay logged in
+    if(!localStorage.loggedIn){
+      localStorage.loggedIn = false
+    }
+    if(JSON.parse(localStorage.loggedIn) === true){
+      setShowChangeForm(true)
+    }
+
+  }, [])
+
+
   function loginCheck(e){
     e.preventDefault()
 
     if(loginInput.email === process.env.REACT_APP_USERNAME && loginInput.password === process.env.REACT_APP_PASSWORD){
       setShowChangeForm(true)
+      localStorage.loggedIn=true
     }
   }
 
@@ -29,7 +42,6 @@ function App() {
     }))
   }
 
-  console.log(process.env.REACT_APP_APIURI)
   function postProblem(e){
     e.preventDefault()
     axios.post(process.env.REACT_APP_APIURI, problemText)
