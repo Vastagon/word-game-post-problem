@@ -29,7 +29,7 @@ function App() {
     }))
   }
 
-
+  console.log(process.env.REACT_APP_APIURI)
   function postProblem(e){
     e.preventDefault()
     axios.post(process.env.REACT_APP_APIURI, problemText)
