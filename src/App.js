@@ -54,6 +54,7 @@ function App() {
     document.getElementById('problemText3').value = ""
     document.getElementById('problemText4').value = ""
 
+    document.getElementById('problemText1').focus()
   }
 
   return (
